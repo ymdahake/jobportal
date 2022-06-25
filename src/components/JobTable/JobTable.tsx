@@ -8,6 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import JobTableRow from '../JobTableRow/JobTableRow';
+import Box from '@mui/material/Box';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import { visuallyHidden } from '@mui/utils';
 
 interface Column {
   id: 'jobTitle' | 'city' | 'domain' | 'email' | 'publishedDate'|'entryLevel';
@@ -74,9 +77,36 @@ const rows = [
   createData('TVS Credit - Business Planning Role (3-10 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
 ];
 
+function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+type Order = 'asc' | 'desc';
+
+function getComparator<Key extends keyof any>(
+  order: Order,
+  orderBy: Key,
+): (
+  a: { [key in Key]: number | string },
+  b: { [key in Key]: number | string },
+) => number {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+
 export default function JobTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(6);
+  const [order, setOrder] = React.useState<Order>('asc');
+  const [orderBy, setOrderBy] = React.useState<keyof Data>('domain');
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -87,10 +117,25 @@ export default function JobTable() {
     setPage(0);
   };
 
+  const handleRequestSort = (
+    event: React.MouseEvent<unknown>,
+    property: keyof Data,
+  ) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+  
+const createSortHandler =
+  (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+    handleRequestSort(event, property);
+  };
+
   return (
+    <Box sx={{ width: '100%' }}>
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table stickyHeader aria-label="sticky table" size="small">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -98,8 +143,21 @@ export default function JobTable() {
                   key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
+                  sortDirection={orderBy === column.id ? order : false}
                 >
-                  {column.label}
+                  
+                  <TableSortLabel
+              active={orderBy === column.id}
+              direction={orderBy === column.id ? order : 'asc'}
+              onClick={createSortHandler(column.id)}
+            >
+              {column.label}
+              {orderBy === column.id ? (
+                <Box component="span" sx={visuallyHidden}>
+                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                </Box>
+              ) : null}
+            </TableSortLabel>
                 </TableCell>
               ))}
             </TableRow>
@@ -107,6 +165,7 @@ export default function JobTable() {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .sort(getComparator(order, orderBy))
               .map((row) => {
                 return (
                 <JobTableRow tableColumns={columns} row={row}/>
@@ -125,5 +184,6 @@ export default function JobTable() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </Box>
   );
 }
