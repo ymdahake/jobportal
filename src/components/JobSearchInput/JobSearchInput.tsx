@@ -3,8 +3,8 @@ import React from 'react'
 
 export default function JobSearchInput() {
   return (
-    <Card sx={{ width: 0.9 , margin: 2 }}>
-        <TextField sx={{ width: 0.9 , margin: 2 }} id="standard-basic" label="Search for Job" variant="standard" />
+    <Card sx={{ mb:1,boxShadow: 1,p:1 }}>
+        <TextField sx={{ width: 1  }} id="standard-basic" label="Search for Job" variant="standard" />
     </Card>
   )
 }

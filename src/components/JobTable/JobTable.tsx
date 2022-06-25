@@ -75,6 +75,15 @@ const rows = [
   createData('Financial Planning Analyst - BFS (2-4 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
   createData('Chalo - Manager - Financial Planning & Analysis (3-5 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
   createData('TVS Credit - Business Planning Role (3-10 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
+  createData('Executive Assistant To CEO (8-10 yrs)-1', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
+  createData('Yulu - Financial Planning & Analysis Role (7-14 yrs)', 'Mumbai', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
+  createData('nurture.farm - Senior Associate - Business Finance - CA (1-3 yrs)', 'Chennai', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
+  createData('External Auditor (1-9 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
+  createData('Manager - Finance - FMCG/FMCD/Retail (5-7 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
+  createData('Manager - Financial Planning & Analysis (4-9 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
+  createData('Financial Planning Analyst - BFS (2-4 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
+  createData('Chalo - Manager - Financial Planning & Analysis (3-5 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
+  createData('TVS Credit - Business Planning Role (3-10 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -104,7 +113,7 @@ function getComparator<Key extends keyof any>(
 
 export default function JobTable() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(6);
+  const [rowsPerPage, setRowsPerPage] = React.useState(500);
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('domain');
 
@@ -134,7 +143,7 @@ const createSortHandler =
   return (
     <Box sx={{ width: '100%' }}>
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 1 }}>
         <Table stickyHeader aria-label="sticky table" size="small">
           <TableHead>
             <TableRow>
