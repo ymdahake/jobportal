@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useContext} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,11 +14,16 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SignIn from '../SignIn/SignIn';
+import { UserContext } from './../../contexts/user.context';
+import './navbar.css'
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
+  const {currentUser} = useContext(UserContext)
+  console.log('current user from Navbar : ' ,currentUser);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -127,12 +133,13 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-          <SignIn/>
-            <Tooltip title="Open settings">
+            {!currentUser && <SignIn/>}
+            {currentUser && <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar  alt="Remy Sharp" src={currentUser['photoURL']} 
+                imgProps={{referrerPolicy: 'origin-when-cross-origin'}} />
               </IconButton>
-            </Tooltip>
+            </Tooltip> }
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
