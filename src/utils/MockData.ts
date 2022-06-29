@@ -1,0 +1,55 @@
+import { Data } from "../models/Job";
+
+export const jobData :Data[] =[
+    {jobId:'1',
+    title:'Executive Assistant To CEO (8-10 yrs)-1',
+    company:'TCS',
+    description:'Executive Assistant To CEO (8-10 yrs)-1',
+    location:'Banglore',
+    remote:'Yes',
+    level:'Fresher',
+    hrEmail:'ymdahake@gmail.com',
+    dateOfPosting : new Date().toDateString()},
+
+    {jobId:'2',
+    title:'Executive Assistant To CEO (8-10 yrs)-1',
+    company:'TCS',
+    description:'Executive Assistant To CEO (8-10 yrs)-1',
+    location:'Banglore',
+    remote:'Yes',
+    level:'Fresher',
+    hrEmail:'ymdahake@gmail.com',
+    dateOfPosting : new Date().toDateString()},
+
+    {jobId:'3',
+    title:'Executive Assistant To CEO (8-10 yrs)-1',
+    company:'TCS',
+    description:'Executive Assistant To CEO (8-10 yrs)-1',
+    location:'Banglore',
+    remote:'Yes',
+    level:'Fresher',
+    hrEmail:'ymdahake@gmail.com',
+    dateOfPosting : new Date().toDateString()},
+
+    {jobId:'4',
+    title:'Executive Assistant To CEO (8-10 yrs)-1',
+    company:'TCS',
+    description:'Executive Assistant To CEO (8-10 yrs)-1',
+    location:'Banglore',
+    remote:'Yes',
+    level:'Fresher',
+    hrEmail:'ymdahake@gmail.com',
+    dateOfPosting : new Date().toDateString()},
+
+    {jobId:'5',
+    title:'Executive Assistant To CEO (8-10 yrs)-1',
+    company:'TCS',
+    description:'Executive Assistant To CEO (8-10 yrs)-1',
+    location:'Banglore',
+    remote:'Yes',
+    level:'Fresher',
+    hrEmail:'ymdahake@gmail.com',
+    dateOfPosting : new Date().toDateString()},
+    
+     
+]

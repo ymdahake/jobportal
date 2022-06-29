@@ -11,79 +11,86 @@ import JobTableRow from '../JobTableRow/JobTableRow';
 import Box from '@mui/material/Box';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { visuallyHidden } from '@mui/utils';
+import { Data } from '../../models/Job';
+import { Column } from '../../models/JobTableColumns';
 
-interface Column {
-  id: 'jobTitle' | 'city' | 'domain' | 'email' | 'publishedDate'|'entryLevel';
-  label: string;
-  minWidth?: number;
-  align?: 'right';
-  format?: (value: number) => string;
-}
+// interface Column {
+//   id: 'jobId' | 'title' | 'company' | 'description' | 'location'|'remote' |'level'|'hrEmail'| 'dateOfPosting';
+//   label: string;
+//   minWidth?: number;
+//   align?: 'right';
+//   format?: (value: number) => string;
+  
+// }
 
 const columns:  Column[] = [
-  { id: 'jobTitle', label: 'JobTitle', minWidth: 170 },
-  { id: 'city', label: 'City', minWidth: 100 },
+  { id: 'jobId', label: 'JobID', minWidth: 20  },
+  { id: 'title', label: 'Title', minWidth: 170 },
+  { id: 'company', label: 'Company', minWidth: 100 },
   {
-    id: 'domain',
-    label: 'Domain',
+    id: 'description',
+    label: 'Description',
     minWidth: 170,
   },
   {
-    id: 'email',
-    label: 'Email',
+    id: 'location',
+    label: 'Location',
     minWidth: 170,
   },
   {
-    id: 'publishedDate',
-    label: 'Published Date',
+    id: 'remote',
+    label: 'Remote',
     minWidth: 170,
   },
   {
-    id: 'entryLevel',
-    label: 'Entry Level',
+    id: 'level',
+    label: 'Level',
     minWidth: 170,
   },
+  {
+    id: 'hrEmail',
+    label: 'HR Email',
+    minWidth: 170,
+  },
+  {
+    id: 'dateOfPosting',
+    label: 'Date Of Posting',
+    minWidth: 170,
+  },
+
 ];
 
-interface Data {
-  jobTitle: string;
-  city: string;
-  domain: string;
-  email: string;
-  publishedDate: string;
-  entryLevel: string;
-}
+// interface Data {
+//   jobTitle: string;
+//   city: string;
+//   domain: string;
+//   email: string;
+//   publishedDate: string;
+//   entryLevel: string;
+// }
 
 function createData(
-  jobTitle: string,
-  city: string,
-  domain: string,
-  email: string,
-  publishedDate: string,
-  entryLevel: string,
+    jobId: string,
+    title: string,
+    company: string,
+    description: string,
+    location: string,
+    remote: string,
+    level: string,
+    hrEmail: string,
+    dateOfPosting :string
 ): Data {
-  return { jobTitle, city, domain, email, publishedDate,entryLevel };
+  return { jobId, title, company, description, location,remote,level,hrEmail,dateOfPosting };
 }
 
 const rows = [
-  createData('Executive Assistant To CEO (8-10 yrs)-1', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('Yulu - Financial Planning & Analysis Role (7-14 yrs)', 'Mumbai', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('nurture.farm - Senior Associate - Business Finance - CA (1-3 yrs)', 'Chennai', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('External Auditor (1-9 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('Manager - Finance - FMCG/FMCD/Retail (5-7 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('Manager - Financial Planning & Analysis (4-9 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('Financial Planning Analyst - BFS (2-4 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('Chalo - Manager - Financial Planning & Analysis (3-5 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('TVS Credit - Business Planning Role (3-10 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('Executive Assistant To CEO (8-10 yrs)-1', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('Yulu - Financial Planning & Analysis Role (7-14 yrs)', 'Mumbai', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('nurture.farm - Senior Associate - Business Finance - CA (1-3 yrs)', 'Chennai', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('External Auditor (1-9 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('Manager - Finance - FMCG/FMCD/Retail (5-7 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('Manager - Financial Planning & Analysis (4-9 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('Financial Planning Analyst - BFS (2-4 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('Chalo - Manager - Financial Planning & Analysis (3-5 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
-  createData('TVS Credit - Business Planning Role (3-10 yrs)', 'Banglore', 'Audit', 'ymdahake@gmail.com',new Date().toDateString(),'Beginner'),
+  createData('1','Executive Assistant To CEO (8-10 yrs)-1','Deloitte','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
+  createData('2','Yulu - Financial Planning & Analysis Role (7-14 yrs)','Deloitte','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
+  createData('3','nurture.farm - Senior Associate - Business Finance - CA (1-3 yrs)','TCS','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
+  createData('4','External Auditor (1-9 yrs)','EY','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
+  createData('5','Manager - Financial Planning & Analysis (4-9 yrs)','KPMG','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
+  createData('6','Chalo - Manager - Financial Planning & Analysis (3-5 yrs)','Deloitte','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
+ 
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -115,7 +122,7 @@ export default function JobTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(500);
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('domain');
+  const [orderBy, setOrderBy] = React.useState<keyof Data>('level');
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);

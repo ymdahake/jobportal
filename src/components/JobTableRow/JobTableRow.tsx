@@ -11,7 +11,7 @@ interface JobTableRowProps{
 
 export default function JobTableRow({tableColumns,row}:JobTableRowProps) {
   return (
-    <TableRow hover role="checkbox" tabIndex={-1} key={row.jobTitle}>
+    <TableRow hover role="checkbox" tabIndex={-1} key={row.title}>
     {tableColumns.map((column) => {
       const value = row[column.id];
       return (
