@@ -7,7 +7,7 @@ import SignUp from '../SignUp/SignUp';
 export default function Home() {
   return (
     <Box sx={{ p:1}}>
-        <JobSearchInput/>
+        {/* <JobSearchInput/> */}
          <JobTable/>
          {/* <SignUp/> */}
          

@@ -4,5 +4,6 @@ export interface Column {
   minWidth?: number;
   align?: 'right';
   format?: (value: number) => string;
+  hide?:boolean;
   
 }

@@ -13,7 +13,7 @@ export default function SingleSelectFilter() {
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 120 ,mt:1 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Age</InputLabel>
         <Select
@@ -22,6 +22,7 @@ export default function SingleSelectFilter() {
           value={age}
           label="Age"
           onChange={handleChange}
+          size="small"
         >
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>

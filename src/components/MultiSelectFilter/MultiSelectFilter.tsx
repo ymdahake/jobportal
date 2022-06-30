@@ -58,6 +58,7 @@ export default function MultiSelectFilter() {
             input={<OutlinedInput label="Tag" />}
             renderValue={(selected) => selected.join(', ')}
             MenuProps={MenuProps}
+            size="small"
           >
             {names.map((name) => (
               <MenuItem key={name} value={name}>
