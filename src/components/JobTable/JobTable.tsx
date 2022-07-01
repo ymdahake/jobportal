@@ -14,10 +14,12 @@ import { visuallyHidden } from "@mui/utils";
 import { Data } from "../../models/Job";
 import { Column } from "../../models/JobTableColumns";
 import { GetAllJobData } from "../../services/JobService";
-import { Button, Card, Grid, styled, TextField } from "@mui/material";
+import { Button, Grid, styled } from "@mui/material";
 import MultiSelectFilter from "./../MultiSelectFilter/MultiSelectFilter";
 import SingleSelectFilter from "./../SingleSelectFilter/SingleSelectFilter";
 import JobSearchInput from "./../JobSearchInput/JobSearchInput";
+import { ClearAll, Search } from "@mui/icons-material";
+import { jobsData } from "./../../utils/MockData";
 
 // interface Column {
 //   id: 'jobId' | 'title' | 'company' | 'description' | 'location'|'remote' |'level'|'hrEmail'| 'dateOfPosting';
@@ -33,9 +35,9 @@ const columns: Column[] = [
   {
     id: "dateOfPosting",
     label: "Date Of Posting",
-    minWidth: 170,
+    minWidth: 140,
   },
-  { id: "title", label: "Title", minWidth: 170 },
+  { id: "title", label: "Title", minWidth: 300 },
   { id: "company", label: "Company", minWidth: 100 },
   // {
   //   id: 'description',
@@ -45,7 +47,7 @@ const columns: Column[] = [
   {
     id: "location",
     label: "Location",
-    minWidth: 170,
+    minWidth: 100,
   },
   // {
   //   id: 'remote',
@@ -55,12 +57,12 @@ const columns: Column[] = [
   {
     id: "level",
     label: "Level",
-    minWidth: 170,
+    minWidth: 100,
   },
   {
     id: "hrEmail",
     label: "HR Email",
-    minWidth: 170,
+    minWidth: 120,
   },
 ];
 
@@ -140,10 +142,13 @@ export default function JobTable() {
   const [filteredRows, setFilterdRows] = React.useState<Data[]>([]);
 
   React.useEffect(() => {
-    GetAllJobData().then((result) => {
-      setRows(result);
-      setFilterdRows(result);
-    });
+    setRows(jobsData);
+    setFilterdRows(jobsData);
+    // GetAllJobData().then((result) => {
+    //   console.log("setting the rows",result)
+    //   setRows(result);
+    //   setFilterdRows(result);
+    // });
   });
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -173,30 +178,44 @@ export default function JobTable() {
 
   return (
     <Box>
-      <Paper sx={{ width: "100%", overflow: "hidden", mb:1,mt:1 }} >
-        <Grid container>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+        
+          justifyContent: 'space-between',
+          py:1
+        }}
+      >
+        <Box sx={{ width: '40%' }}>
+          <JobSearchInput />
+        </Box>
+        <Box sx={{ width: '20%', px:1 }}>
+        <SingleSelectFilter />
+        </Box>
+        <Box sx={{ width: '20%',  pr:1 }}>
+          <SingleSelectFilter />
+        </Box>
 
-        <Grid item xs={3}>
-            <JobSearchInput />
-          </Grid>
-          <Grid item xs={3}>
-      
-              <MultiSelectFilter />
-
-          </Grid>
-          <Grid item xs={3}>
-
-              <SingleSelectFilter />
-
-          </Grid>
-          
-          <Grid item xs={3}>
-            <Button  sx={{ width: "80%", mb:1,mt:1 }} size="large" variant="contained" color="success">
-              Filter
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
+        <Box sx={{ width: '20%'}}>
+          <Button
+            sx={{ py:1, width: '50%'}}
+            variant="contained"
+            size="small"
+            endIcon={<Search />}
+          >
+            Search
+          </Button>
+          <Button
+            sx={{ py:1 ,width: '50%'}}
+            variant="outlined"
+            size="small"
+            // endIcon={<ClearAll />}
+          >
+            Clear All
+          </Button>
+        </Box>
+      </Box>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 1 }}>
           <Table stickyHeader aria-label="sticky table" size="small">

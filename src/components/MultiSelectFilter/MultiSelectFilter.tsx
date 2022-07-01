@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
+import { Box } from '@mui/material';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -46,8 +47,9 @@ export default function MultiSelectFilter() {
     };
   
     return (
-      <div>
-        <FormControl sx={{ m: 1, width: 300 }}>
+      // sx={{ m: 1, width: 300 }}
+    
+          <FormControl sx={{ width: "100%" }} >
           <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
           <Select
             labelId="demo-multiple-checkbox-label"
@@ -68,6 +70,7 @@ export default function MultiSelectFilter() {
             ))}
           </Select>
         </FormControl>
-      </div>
+
+
     );
 }
