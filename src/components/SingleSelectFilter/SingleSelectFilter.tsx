@@ -1,35 +1,43 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import * as React from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { Option } from "../../models/Option";
 
-export default function SingleSelectFilter() {
-  const [age, setAge] = React.useState('');
+interface childProps {
+  options: Option[];
+  label: string;
+  onItemChange: (label: string, value: string) => void;
+}
 
+export default function SingleSelectFilter(props: childProps) {
+  const { options, label, onItemChange } = props;
+  const [selectedValue, setselectedValue] = React.useState("");
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+    setselectedValue(event.target.value);
+    onItemChange(label, event.target.value);
   };
 
   return (
-    // sx={{ minWidth: 120 ,mt:1 }}
-
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-          size="small"
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-
+    <FormControl fullWidth>
+      <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={selectedValue}
+        label={props.label}
+        onChange={handleChange}
+        size="small"
+      >
+        {options.map((item) => {
+          return (
+            <MenuItem value={item.key} key={item.key}>
+              {item.value}
+            </MenuItem>
+          );
+        })}
+      </Select>
+    </FormControl>
   );
 }

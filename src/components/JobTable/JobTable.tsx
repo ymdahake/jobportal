@@ -14,21 +14,27 @@ import { visuallyHidden } from "@mui/utils";
 import { Data } from "../../models/Job";
 import { Column } from "../../models/JobTableColumns";
 import { GetAllJobData } from "../../services/JobService";
-import { Button, Grid, styled } from "@mui/material";
-import MultiSelectFilter from "./../MultiSelectFilter/MultiSelectFilter";
+import { Button, styled } from "@mui/material";
 import SingleSelectFilter from "./../SingleSelectFilter/SingleSelectFilter";
 import JobSearchInput from "./../JobSearchInput/JobSearchInput";
-import { ClearAll, Search } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
 import { jobsData } from "./../../utils/MockData";
+import { Option } from "../../models/Option";
 
-// interface Column {
-//   id: 'jobId' | 'title' | 'company' | 'description' | 'location'|'remote' |'level'|'hrEmail'| 'dateOfPosting';
-//   label: string;
-//   minWidth?: number;
-//   align?: 'right';
-//   format?: (value: number) => string;
+export const locations: Option[] = [
+  { key: "Banglore", value: "Banglore" },
+  { key: "Chennai", value: "Chennai" },
+  { key: "Mumbai", value: "Mumbai" },
+  { key: "Pune", value: "Pune" },
+  { key: "Delhi", value: "Delhi" },
+  { key: "Hydrabad", value: "Hydrabad" },
+];
 
-// }
+export const levels: Option[] = [
+  { key: "Fresher", value: "Fresher" },
+  { key: "Senior", value: "Senior" },
+  { key: "Expert", value: "Expert" },
+];
 
 const columns: Column[] = [
   // { id: 'jobId', label: 'JobID', minWidth: 20  },
@@ -65,39 +71,6 @@ const columns: Column[] = [
     minWidth: 120,
   },
 ];
-
-// interface Data {
-//   jobTitle: string;
-//   city: string;
-//   domain: string;
-//   email: string;
-//   publishedDate: string;
-//   entryLevel: string;
-// }
-
-// function createData(
-//     jobId: string,
-//     title: string,
-//     company: string,
-//     description: string,
-//     location: string,
-//     remote: string,
-//     level: string,
-//     hrEmail: string,
-//     dateOfPosting :string
-// ): Data {
-//   return { jobId, title, company, description, location,remote,level,hrEmail,dateOfPosting };
-// }
-
-// const rows = [
-//   createData('1','Executive Assistant To CEO (8-10 yrs)-1','Deloitte','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
-//   createData('2','Yulu - Financial Planning & Analysis Role (7-14 yrs)','Deloitte','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
-//   createData('3','nurture.farm - Senior Associate - Business Finance - CA (1-3 yrs)','TCS','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
-//   createData('4','External Auditor (1-9 yrs)','EY','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
-//   createData('5','Manager - Financial Planning & Analysis (4-9 yrs)','KPMG','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
-//   createData('6','Chalo - Manager - Financial Planning & Analysis (3-5 yrs)','Deloitte','Description', 'Banglore','Yes', 'Fresher', 'ymdahake@gmail.com',new Date().toDateString()),
-
-// ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -140,6 +113,9 @@ export default function JobTable() {
   const [orderBy, setOrderBy] = React.useState<keyof Data>("level");
   const [rows, setRows] = React.useState<Data[]>([]);
   const [filteredRows, setFilterdRows] = React.useState<Data[]>([]);
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [cityFilter, setCityFilter] = React.useState("");
+  const [levelFilter, setLevelFilter] = React.useState("");
 
   React.useEffect(() => {
     setRows(jobsData);
@@ -176,30 +152,46 @@ export default function JobTable() {
       handleRequestSort(event, property);
     };
 
+  const handleSearchQueryFilterChange = (query: string) => {
+    console.log("Search Query", query);
+  };
+
+  const onSelectedItemChange = (label: string, value: string) => {
+    console.log("label : ", label, "ChangedValue", value);
+  };
+
   return (
     <Box>
       <Box
         sx={{
           display: "flex",
           flexDirection: "row",
-        
-          justifyContent: 'space-between',
-          py:1
+
+          justifyContent: "space-between",
+          py: 1,
         }}
       >
-        <Box sx={{ width: '40%' }}>
-          <JobSearchInput />
+        <Box sx={{ width: "40%" }}>
+          <JobSearchInput onSearchQueryChange={handleSearchQueryFilterChange} />
         </Box>
-        <Box sx={{ width: '20%', px:1 }}>
-        <SingleSelectFilter />
+        <Box sx={{ width: "20%", px: 1 }}>
+          <SingleSelectFilter
+            options={locations}
+            label="Location"
+            onItemChange={onSelectedItemChange}
+          />
         </Box>
-        <Box sx={{ width: '20%',  pr:1 }}>
-          <SingleSelectFilter />
+        <Box sx={{ width: "20%", pr: 1 }}>
+          <SingleSelectFilter
+            options={levels}
+            label="Level"
+            onItemChange={onSelectedItemChange}
+          />
         </Box>
 
-        <Box sx={{ width: '20%'}}>
+        <Box sx={{ width: "20%" }}>
           <Button
-            sx={{ py:1, width: '50%'}}
+            sx={{ py: 1, width: "50%" }}
             variant="contained"
             size="small"
             endIcon={<Search />}
@@ -207,7 +199,7 @@ export default function JobTable() {
             Search
           </Button>
           <Button
-            sx={{ py:1 ,width: '50%'}}
+            sx={{ py: 1, width: "50%" }}
             variant="outlined"
             size="small"
             // endIcon={<ClearAll />}

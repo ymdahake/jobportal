@@ -1,12 +1,16 @@
 import { Box, TextField } from "@mui/material";
 import React from "react";
 
-export default function JobSearchInput() {
+interface Childprops {
+  onSearchQueryChange :(input :string)=>void;
+}
+
+export default function JobSearchInput(props :Childprops) {
+  const {onSearchQueryChange} = props
   const onInputChange = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
-    console.log(event.target.value);
-    console.log("input changed");
+    onSearchQueryChange(event.target.value)
   };
 
   return (
