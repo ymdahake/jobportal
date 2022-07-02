@@ -10,3 +10,10 @@ export interface Filters {
     filterByLevel :string
   }
   
+
+  export const FiltersIntialState :Filters = {
+    filterByDate :"",
+    filterByLocation :"",
+    filterByLevel :""
+  }
+  

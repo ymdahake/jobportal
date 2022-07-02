@@ -19,7 +19,9 @@ import SingleSelectFilter from "./../SingleSelectFilter/SingleSelectFilter";
 import JobSearchInput from "./../JobSearchInput/JobSearchInput";
 import { ClearAll, Search } from "@mui/icons-material";
 import { jobsData } from "./../../utils/MockData";
-import { Option } from "../../models/Option";
+import { Filters, FiltersIntialState, Option } from "../../models/Option";
+import { useContext } from "react";
+import { FilterContext } from "../../contexts/filter.context";
 
 
 
@@ -169,7 +171,17 @@ export default function JobTable() {
   // const onSelectedItemChange = (label: string, value: string) => {
   //   console.log("label : ", label, "ChangedValue", value);
   // };
+  const { selectedfilters, setselectedfilters } = useContext(FilterContext);
 
+  const onSearchButtonClick=()=>{
+    console.log("These are selected filters : ",selectedfilters)
+  }
+
+  const onClearAllButtonClick=()=>{
+    console.log(FiltersIntialState);
+    setselectedfilters({...FiltersIntialState})
+    console.log("POST clearThese are selected filters : ",selectedfilters)
+  }
   return (
     <Box>
       <Box
@@ -209,6 +221,7 @@ export default function JobTable() {
             variant="contained"
             size="small"
             endIcon={<Search />}
+            onClick={onSearchButtonClick}
           >
             Search
           </Button>
@@ -217,6 +230,7 @@ export default function JobTable() {
             variant="outlined"
             size="small"
             endIcon={<ClearAll />}
+            onClick={onClearAllButtonClick}       
           >
             Clear All
           </Button>

@@ -19,17 +19,29 @@ export default function SingleSelectFilter(props: childProps) {
   const [selectedValue, setselectedValue] = React.useState("");
   const { selectedfilters, setselectedfilters } = useContext(FilterContext);
 
+
+  React.useEffect (()=>{
+    if (name === "filterByDate") 
+    setselectedValue(selectedfilters.filterByDate);
+  if (name === "filterByLocation")
+    setselectedValue(selectedfilters.filterByLocation);
+  if (name === "filterByLevel") 
+    setselectedValue(selectedfilters.filterByLevel);
+  },[selectedfilters])
+ 
+  
+  
+
   const handleChange = (event: SelectChangeEvent) => {
     setselectedValue(event.target.value);
-    
-    if (event.target.name === "filterByDate")
-      selectedfilters.filterByDate = event.target.value;
-    if (event.target.name === "filterByLocation")
-      selectedfilters.filterByLocation = event.target.value;
-    if (event.target.name === "filterByLevel")
-      selectedfilters.filterByLevel = event.target.value;
 
-    setselectedfilters({ ...selectedfilters });
+    if (event.target.name === "filterByDate")
+      setselectedfilters({ ...selectedfilters, [name]: event.target.value });
+    if (event.target.name === "filterByLocation")
+      setselectedfilters({ ...selectedfilters, [name]: event.target.value });
+    if (event.target.name === "filterByLevel")
+      setselectedfilters({ ...selectedfilters, [name]: event.target.value });
+
     console.log("fromfilter context : ", selectedfilters);
   };
 
