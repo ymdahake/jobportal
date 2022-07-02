@@ -17,9 +17,12 @@ import { GetAllJobData } from "../../services/JobService";
 import { Button, styled } from "@mui/material";
 import SingleSelectFilter from "./../SingleSelectFilter/SingleSelectFilter";
 import JobSearchInput from "./../JobSearchInput/JobSearchInput";
-import { Search } from "@mui/icons-material";
+import { ClearAll, Search } from "@mui/icons-material";
 import { jobsData } from "./../../utils/MockData";
 import { Option } from "../../models/Option";
+
+
+
 
 export const locations: Option[] = [
   { key: "Banglore", value: "Banglore" },
@@ -34,6 +37,13 @@ export const levels: Option[] = [
   { key: "Fresher", value: "Fresher" },
   { key: "Senior", value: "Senior" },
   { key: "Expert", value: "Expert" },
+];
+
+export const dates: Option[] = [
+  { key: "1", value: "by 1 Week" },
+  { key: "2", value: "by 2 week" },
+  { key: "3", value: "by 3 week" },
+  { key: "4", value: "by Month" },
 ];
 
 const columns: Column[] = [
@@ -152,13 +162,13 @@ export default function JobTable() {
       handleRequestSort(event, property);
     };
 
-  const handleSearchQueryFilterChange = (query: string) => {
-    console.log("Search Query", query);
-  };
+  // const handleSearchQueryFilterChange = (query: string) => {
+  //   console.log("Search Query", query);
+  // };
 
-  const onSelectedItemChange = (label: string, value: string) => {
-    console.log("label : ", label, "ChangedValue", value);
-  };
+  // const onSelectedItemChange = (label: string, value: string) => {
+  //   console.log("label : ", label, "ChangedValue", value);
+  // };
 
   return (
     <Box>
@@ -166,32 +176,36 @@ export default function JobTable() {
         sx={{
           display: "flex",
           flexDirection: "row",
-
-          justifyContent: "space-between",
+          justifyContent: "flex-end",
           py: 1,
         }}
       >
-        <Box sx={{ width: "40%" }}>
-          <JobSearchInput onSearchQueryChange={handleSearchQueryFilterChange} />
+        <Box sx={{ width: "20%" }}>
+          {/* <JobSearchInput onSearchQueryChange={handleSearchQueryFilterChange} /> */}
+          <SingleSelectFilter
+            options={dates}
+            label="Date" 
+            name="filterByDate"
+          />
         </Box>
         <Box sx={{ width: "20%", px: 1 }}>
           <SingleSelectFilter
             options={locations}
             label="Location"
-            onItemChange={onSelectedItemChange}
+            name="filterByLocation"
           />
         </Box>
         <Box sx={{ width: "20%", pr: 1 }}>
           <SingleSelectFilter
             options={levels}
             label="Level"
-            onItemChange={onSelectedItemChange}
+            name="filterByLevel"
           />
         </Box>
 
         <Box sx={{ width: "20%" }}>
           <Button
-            sx={{ py: 1, width: "50%" }}
+            sx={{ py: 1, width: "45%" }}
             variant="contained"
             size="small"
             endIcon={<Search />}
@@ -199,10 +213,10 @@ export default function JobTable() {
             Search
           </Button>
           <Button
-            sx={{ py: 1, width: "50%" }}
+            sx={{ py: 1, width: "45%",ml:1 }}
             variant="outlined"
             size="small"
-            // endIcon={<ClearAll />}
+            endIcon={<ClearAll />}
           >
             Clear All
           </Button>
