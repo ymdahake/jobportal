@@ -137,7 +137,7 @@ export default function JobTable() {
     //   setRows(result);
     //   setFilterdRows(result);
     // });
-  });
+  },[rows]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -175,11 +175,21 @@ export default function JobTable() {
 
   const onSearchButtonClick=()=>{
     console.log("These are selected filters : ",selectedfilters)
+  
+    const filteredResult : Data[] =rows.filter((item)=>{
+      return  selectedfilters.filterByLocation !==""? item.location=== selectedfilters.filterByLocation :1 
+      && selectedfilters.filterByLevel!==""? item.level===selectedfilters.filterByLevel:1
+    })
+    console.log('filteredResult :' ,filteredResult)
+    setFilterdRows(filteredResult)
+
+
   }
 
   const onClearAllButtonClick=()=>{
     console.log(FiltersIntialState);
     setselectedfilters({...FiltersIntialState})
+    setFilterdRows(rows);
     console.log("POST clearThese are selected filters : ",selectedfilters)
   }
   return (
@@ -215,9 +225,9 @@ export default function JobTable() {
           />
         </Box>
 
-        <Box sx={{ width: "20%" }}>
+        <Box sx={{ width: "30%" }}>
           <Button
-            sx={{ py: 1, width: "45%" }}
+            sx={{ py: 1, width: "40%" }}
             variant="contained"
             size="small"
             endIcon={<Search />}
@@ -226,10 +236,10 @@ export default function JobTable() {
             Search
           </Button>
           <Button
-            sx={{ py: 1, width: "45%",ml:1 }}
+            sx={{ py: 1, width: "40%",ml:1 }}
             variant="outlined"
             size="small"
-            endIcon={<ClearAll />}
+            // endIcon={<ClearAll />}
             onClick={onClearAllButtonClick}       
           >
             Clear All

@@ -34,7 +34,7 @@ export default function SingleSelectFilter(props: childProps) {
 
   const handleChange = (event: SelectChangeEvent) => {
     setselectedValue(event.target.value);
-
+    console.log(event);
     if (event.target.name === "filterByDate")
       setselectedfilters({ ...selectedfilters, [name]: event.target.value });
     if (event.target.name === "filterByLocation")
