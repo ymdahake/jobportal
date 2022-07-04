@@ -130,8 +130,10 @@ export default function JobTable() {
   const [levelFilter, setLevelFilter] = React.useState("");
 
   React.useEffect(() => {
+    ///For mock local data uncomment below code
    setRows(jobsData);
    setFilterdRows(jobsData);
+///for firebase data uncomment below code
     // GetAllJobData().then((result) => {
     //   console.log("setting the rows",result)
     //   setRows(result);
