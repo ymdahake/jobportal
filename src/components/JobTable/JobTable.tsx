@@ -175,10 +175,18 @@ export default function JobTable() {
 
   const onSearchButtonClick=()=>{
     console.log("These are selected filters : ",selectedfilters)
-  
+
+    const fromNumberOfDays= +selectedfilters.filterByDate*7;
+    let fromDate= new Date();
+    fromDate.setDate(fromDate.getDate()-fromNumberOfDays)
+
+    console.log(fromDate)
+
+    console.log("Before filter result : " ,rows)
     const filteredResult : Data[] =rows.filter((item)=>{
-      return  selectedfilters.filterByLocation !==""? item.location=== selectedfilters.filterByLocation :1 
-      && selectedfilters.filterByLevel!==""? item.level===selectedfilters.filterByLevel:1
+      return  (selectedfilters.filterByLocation !==""? item.location=== selectedfilters.filterByLocation :1) 
+      && (selectedfilters.filterByLevel!==""? item.level===selectedfilters.filterByLevel:1)
+      && (selectedfilters.filterByDate!==""? new Date(item.dateOfPosting) >= fromDate:1)
     })
     console.log('filteredResult :' ,filteredResult)
     setFilterdRows(filteredResult)

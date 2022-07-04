@@ -1,15 +1,18 @@
 import { Data } from "../models/Job";
 
+const d = new Date();
+const newDate=d.setDate(d.getDate()-30);
+
 export const jobsData :Data[] =[
     {jobId:'1',
-    title:'Executive Assistant To CEO (8-10 yrs)-1',
+    title:'Date Executive Assistant To CEO (8-10 yrs)-1',
     company:'TCS',
-    description:'Executive Assistant To CEO (8-10 yrs)-1',
+    description:'Date Executive Assistant To CEO (8-10 yrs)-1',
     location:'Chennai',
     remote:'Yes',
     level:'Expert',
     hrEmail:'abc@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting :d.toDateString() },
 
     {jobId:'2',
     title:'Yulu - Financial Planning & Analysis Role (7-14 yrs)',
