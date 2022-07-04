@@ -130,15 +130,16 @@ export default function JobTable() {
   const [levelFilter, setLevelFilter] = React.useState("");
 
   React.useEffect(() => {
-    setRows(jobsData);
-    setFilterdRows(jobsData);
+   setRows(jobsData);
+   setFilterdRows(jobsData);
     // GetAllJobData().then((result) => {
     //   console.log("setting the rows",result)
     //   setRows(result);
-    //   setFilterdRows(result);
+    //   setFilterdRows(result);   
     // });
-  },[rows]);
+  },[]);
 
+ 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -190,7 +191,6 @@ export default function JobTable() {
     })
     console.log('filteredResult :' ,filteredResult)
     setFilterdRows(filteredResult)
-
 
   }
 
