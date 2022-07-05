@@ -131,12 +131,20 @@ export default function JobTable() {
 
   React.useEffect(() => {
     ///For mock local data uncomment below code
-   setRows(jobsData);
+    let alteredJobsData:any = jobsData;
+    jobsData.map((data,index)=>{
+      alteredJobsData[index].masked = true;
+    });
+   setRows(alteredJobsData);
    setFilterdRows(jobsData);
 ///for firebase data uncomment below code
     // GetAllJobData().then((result) => {
-    //   console.log("setting the rows",result)
-    //   setRows(result);
+    //   console.log("setting the rows",result);
+    //   let actualData:any = result;
+    //   actualData.map((data:any,index:number)=>{
+    //     actualData[index].masked = true;
+    //   });
+    //   setRows(actualData);
     //   setFilterdRows(result);   
     // });
   },[]);
@@ -201,6 +209,16 @@ export default function JobTable() {
     setselectedfilters({...FiltersIntialState})
     setFilterdRows(rows);
     console.log("POST clearThese are selected filters : ",selectedfilters)
+  }
+
+  const onUnmaskingEmail = (data:any) => {
+    const currentData:any = filteredRows.slice();
+    currentData.map((value:any,index:number)=>{
+      if(data.jobId == value.jobId){
+        currentData[index].masked = false
+      }
+    });
+    setFilterdRows(currentData);
   }
   return (
     <Box>
@@ -291,7 +309,7 @@ export default function JobTable() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .sort(getComparator(order, orderBy))
                 .map((row) => {
-                  return <JobTableRow tableColumns={columns} row={row} />;
+                  return <JobTableRow tableColumns={columns} row={row} onDataChange = {(data)=>onUnmaskingEmail(data)}/>;
                 })}
             </TableBody>
           </Table>
