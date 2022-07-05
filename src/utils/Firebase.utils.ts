@@ -3,6 +3,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signOut,
   User,
 } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
@@ -51,3 +52,6 @@ export const createUserDocumentFromAuth = async (userAuth: User) => {
   }
   return  userDocRef;
 };
+
+
+export const signOutUser =async ()=>signOut(auth)
