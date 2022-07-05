@@ -14,12 +14,11 @@ import { visuallyHidden } from "@mui/utils";
 import { Data } from "../../models/Job";
 import { Column } from "../../models/JobTableColumns";
 import { GetAllJobData } from "../../services/JobService";
-import { Button, styled } from "@mui/material";
+import { Button } from "@mui/material";
 import SingleSelectFilter from "./../SingleSelectFilter/SingleSelectFilter";
-import JobSearchInput from "./../JobSearchInput/JobSearchInput";
-import { ClearAll, Search } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
 import { jobsData } from "./../../utils/MockData";
-import { Filters, FiltersIntialState, Option } from "../../models/Option";
+import {  FiltersIntialState, Option } from "../../models/Option";
 import { useContext } from "react";
 import { FilterContext } from "../../contexts/filter.context";
 
@@ -108,15 +107,9 @@ function getComparator<Key extends keyof any>(
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function filterRows(field: string, data: Data[], value: string) {}
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+
+
 
 export default function JobTable() {
   const [page, setPage] = React.useState(0);
@@ -125,9 +118,6 @@ export default function JobTable() {
   const [orderBy, setOrderBy] = React.useState<keyof Data>("level");
   const [rows, setRows] = React.useState<Data[]>([]);
   const [filteredRows, setFilterdRows] = React.useState<Data[]>([]);
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const [cityFilter, setCityFilter] = React.useState("");
-  const [levelFilter, setLevelFilter] = React.useState("");
 
   React.useEffect(() => {
     ///For mock local data uncomment below code
