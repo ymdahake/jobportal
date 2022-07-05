@@ -75,7 +75,7 @@ const Navbar = () => {
               textDecoration: "none",
             }}
           >
-            LOGO
+            Live100X
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
