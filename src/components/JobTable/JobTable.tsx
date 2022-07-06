@@ -21,6 +21,7 @@ import { jobsData } from "./../../utils/MockData";
 import {  FiltersIntialState, Option } from "../../models/Option";
 import { useContext } from "react";
 import { FilterContext } from "../../contexts/filter.context";
+import SeeMore from './../SeeMore/SeeMore';
 
 
 
@@ -313,7 +314,10 @@ export default function JobTable() {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
+       <SeeMore/>
       </Paper>
+
+      
     </Box>
   );
 }
