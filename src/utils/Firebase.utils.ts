@@ -2,6 +2,8 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   GoogleAuthProvider,
+  NextOrObserver,
+  onAuthStateChanged,
   signInWithPopup,
   signOut,
   User,
@@ -55,3 +57,6 @@ export const createUserDocumentFromAuth = async (userAuth: User) => {
 
 
 export const signOutUser =async ()=>signOut(auth)
+
+export const onAuthStateChagnedListener=(callback: NextOrObserver<User>)=>
+onAuthStateChanged(auth,callback);

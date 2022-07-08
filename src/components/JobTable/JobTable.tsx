@@ -16,13 +16,14 @@ import { Column } from "../../models/JobTableColumns";
 import { GetAllJobData } from "../../services/JobService";
 import { Button } from "@mui/material";
 import SingleSelectFilter from "./../SingleSelectFilter/SingleSelectFilter";
-import { Search } from "@mui/icons-material";
+import { ClearAll, Search } from "@mui/icons-material";
 import { jobsData } from "./../../utils/MockData";
 import { FiltersIntialState, Option } from "../../models/Option";
 import { useContext } from "react";
 import { FilterContext } from "../../contexts/filter.context";
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
+import SeeMore from './../SeeMore/SeeMore';
 
 
 
@@ -246,7 +247,7 @@ export default function JobTable() {
         sx={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "flex-end",
+          justifyContent: "space-between",
           py: 1,
         }}
       >
@@ -273,9 +274,9 @@ export default function JobTable() {
           />
         </Box>
 
-        <Box sx={{ width: "30%" }}>
+        <Box sx={{ width: "40%" }}>
           <Button
-            sx={{ py: 1, width: "40%" }}
+            sx={{ py: 1, width: "48%" }}
             variant="contained"
             size="small"
             endIcon={<Search />}
@@ -284,11 +285,11 @@ export default function JobTable() {
             Search
           </Button>
           <Button
-            sx={{ py: 1, width: "40%", ml: 1 }}
+            sx={{ py: 1, width: "48%",ml:1 }}
             variant="outlined"
             size="small"
-            // endIcon={<ClearAll />}
-            onClick={onClearAllButtonClick}
+            endIcon={<ClearAll />}
+            onClick={onClearAllButtonClick}       
           >
             Clear All
           </Button>
@@ -343,6 +344,7 @@ export default function JobTable() {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
+       <SeeMore/>
       </Paper>
       <Modal
         keepMounted
