@@ -24,6 +24,7 @@ import { FilterContext } from "../../contexts/filter.context";
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import SeeMore from './../SeeMore/SeeMore';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 
 
@@ -135,6 +136,9 @@ export default function JobTable() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const isMobile = useMediaQuery('(max-width:420px)');
+
+  console.log("isMobile : ",isMobile )
 
   React.useEffect(() => {
     ///For mock local data uncomment below code
@@ -242,16 +246,18 @@ export default function JobTable() {
   // },[modalData]);
   console.log('ModalData----->',modalData);
   return (
+    
     <Box>
+      
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: isMobile? "column":"row",
           justifyContent: "space-between",
           py: 1,
         }}
       >
-        <Box sx={{ width: "20%" }}>
+        <Box sx={{width: isMobile? "100%" :"20%"  }}>
           {/* <JobSearchInput onSearchQueryChange={handleSearchQueryFilterChange} /> */}
           <SingleSelectFilter
             options={dates}
@@ -259,22 +265,22 @@ export default function JobTable() {
             name="filterByDate"
           />
         </Box>
-        <Box sx={{ width: "20%", px: 1 }}>
+        <Box sx={{ width: isMobile? "100%" :"20%", px: isMobile? 0: 1 }}>
           <SingleSelectFilter
             options={locations}
             label="Location"
             name="filterByLocation"
           />
         </Box>
-        <Box sx={{ width: "20%", pr: 1 }}>
+        <Box sx={{ width: isMobile? "100%" :"20%", pr: isMobile? 0:1 }}>
           <SingleSelectFilter
             options={levels}
             label="Level"
             name="filterByLevel"
           />
         </Box>
-
-        <Box sx={{ width: "40%" }}>
+{/* for button box desktop width will be 40% */}
+        <Box sx={{ width: isMobile? "100%" :"40%" }}>
           <Button
             sx={{ py: 1, width: "48%" }}
             variant="contained"
