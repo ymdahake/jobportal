@@ -95,6 +95,11 @@ const columns: Column[] = [
     label: "HR Email",
     minWidth: 120,
   },
+  {
+    id: "postedBy",
+    label: "Posted By",
+    minWidth: 120,
+  },
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {

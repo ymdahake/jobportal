@@ -52,7 +52,8 @@ export const SetJobsData =async (jobsData : Data[])=>{
             remote: item.remote,
             level: item.level,
             hrEmail: item.hrEmail,
-            dateOfPosting :item.dateOfPosting
+            dateOfPosting :item.dateOfPosting,
+            postedBy :item.postedBy
           });
           console.log("Document written with ID: ", docRef.id);
     })

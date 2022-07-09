@@ -18,4 +18,5 @@
     level: string;
     hrEmail: string;
     dateOfPosting :string
+    postedBy:string
     }

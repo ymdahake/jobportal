@@ -12,7 +12,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Expert',
     hrEmail:'abc@gmail.com',
-    dateOfPosting :d.toDateString() },
+    dateOfPosting :d.toDateString(),
+    postedBy:'Agency' },
 
     {jobId:'2',
     title:'Yulu - Financial Planning & Analysis Role (7-14 yrs)',
@@ -22,7 +23,10 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'ravi@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Business POC'
+
+},
 
     {jobId:'3',
     title:'Yulu - Financial Planning & Analysis Role (7-14 yrs)',
@@ -32,7 +36,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'ganesh@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Agency'},
 
     {jobId:'4',
     title:'Manager - Finance - FMCG/FMCD/Retail (5-7 yrs)',
@@ -42,7 +47,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'ramesh@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Company HR'},
 
     {jobId:'5',
     title:'Manager - Financial Planning & Analysis (4-9 yrs)',
@@ -52,7 +58,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'gaesh@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Agency'},
 
     {jobId:'6',
     title:'Financial Planning Analyst - BFS (2-4 yrs)',
@@ -62,7 +69,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'gaesh@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Company HR'},
 
     {jobId:'7',
     title:'Chalo - Manager - Financial Planning & Analysis (3-5 yrs)',
@@ -72,7 +80,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'gaesh@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Agency'},
 
     {jobId:'8',
     title:'Train Executive Assistant To CEO (8-10 yrs)-1',
@@ -82,7 +91,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'gaesh@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Agency'},
 
     {jobId:'9',
     title:'Honda company Credit - Business Planning Role (3-10 yrs)',
@@ -92,7 +102,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'gaesh@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Agency'},
 
     {jobId:'10',
     title:'Senior director - Financial Planning & Analysis (4-9 yrs)',
@@ -102,7 +113,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'gaesh@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Agency'},
 
     {jobId:'11',
     title:'CEO - Financial Planning & Analysis (4-9 yrs)',
@@ -112,7 +124,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'gaesh@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Agency'},
 
     {jobId:'12',
     title:'Assistant Manager - Financial Planning & Analysis (4-9 yrs)',
@@ -122,7 +135,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'gaesh@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Agency'},
 
     {jobId:'13',
     title:'Supporting maanger - Financial Planning & Analysis (4-9 yrs)',
@@ -132,7 +146,8 @@ export const jobsData :Data[] =[
     remote:'Yes',
     level:'Fresher',
     hrEmail:'gaesh@gmail.com',
-    dateOfPosting : new Date().toDateString()},
+    dateOfPosting : new Date().toDateString(),
+    postedBy:'Agency'},
     
      
 ]

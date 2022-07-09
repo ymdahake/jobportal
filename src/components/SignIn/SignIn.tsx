@@ -13,7 +13,7 @@ export default function SignIn() {
       // GetAllJobData().then((result)=>{
       //   console.log('all jobs data yogi',result)
       // });
-    //  SetJobsData(jobsData);
+     // SetJobsData(jobsData);
         const {user} =await signInWithGooglePopup();
         setCurrentUser(user);
         console.log(user);
