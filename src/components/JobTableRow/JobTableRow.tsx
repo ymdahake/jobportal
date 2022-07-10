@@ -1,9 +1,10 @@
-import React from 'react'
+import React,{ useContext } from 'react'
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import {Data} from '../../models/Job'
 import { Column } from '../../models/JobTableColumns';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { UserContext } from "./../../contexts/user.context";
 
 interface JobTableRowProps{
     tableColumns:Column[];
@@ -13,6 +14,7 @@ interface JobTableRowProps{
 }
 
 export default function JobTableRow({tableColumns,row,onDataChange,handleModal}:JobTableRowProps) {
+  const { currentUser,setCurrentUser } = useContext(UserContext);
 
   const onIconClick = (data:any) => {
     onDataChange(data)
@@ -21,6 +23,8 @@ export default function JobTableRow({tableColumns,row,onDataChange,handleModal}:
   const onEmailClick = (data:any) => {
     handleModal(row);
   }
+
+  console.log('CurrentUser------>',currentUser);
   return (
     <TableRow hover role="checkbox" tabIndex={-1} key={row.jobId}>
     {tableColumns.map((column,index:number) => {

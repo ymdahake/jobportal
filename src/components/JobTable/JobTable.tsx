@@ -25,19 +25,36 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import SeeMore from './../SeeMore/SeeMore';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { UserContext } from "./../../contexts/user.context";
+
 
 
 
 const style = {
   position: 'absolute' as 'absolute',
-  top: '58%',
+  width:'40%',
+  top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  borderRadius:'20px'
 };
+
+const loggeoutStyle = {
+  position: 'absolute' as 'absolute',
+  // width:'40%',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  borderRadius:'20px'
+}
 
 export const locations: Option[] = [
   { key: "Banglore", value: "Banglore" },
@@ -142,6 +159,7 @@ export default function JobTable() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const isMobile = useMediaQuery('(max-width:420px)');
+  const { currentUser,setCurrentUser } = useContext(UserContext);
 
   console.log("isMobile : ",isMobile )
 
@@ -164,6 +182,14 @@ export default function JobTable() {
     //   setFilterdRows(result);   
     // });
   }, []);
+
+  // React.useEffect(()=>{
+  //   const currentData: any = filteredRows.slice();
+  //     currentData.map((value: any, index: number) => {
+  //       currentData[index].masked = true;
+  //     });
+  //     setFilterdRows(currentData);
+  // },[currentUser])
 
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -228,13 +254,18 @@ export default function JobTable() {
   }
 
   const onUnmaskingEmail = (data: any) => {
-    const currentData: any = filteredRows.slice();
-    currentData.map((value: any, index: number) => {
-      if (data.jobId == value.jobId) {
-        currentData[index].masked = false
-      }
-    });
-    setFilterdRows(currentData);
+    if(currentUser != null){
+      const currentData: any = filteredRows.slice();
+      currentData.map((value: any, index: number) => {
+        if (data.jobId == value.jobId) {
+          currentData[index].masked = false
+        }
+      });
+      setFilterdRows(currentData);
+    }else{
+      handleOpen();
+    }
+    
   }
 
   const handleModal = (data:any) => {
@@ -244,11 +275,6 @@ export default function JobTable() {
     },25)
   }
 
-  // React.useEffect(()=>{
-  //   if(modalData.length > 0 ){
-      
-  //   }
-  // },[modalData]);
   console.log('ModalData----->',modalData);
   return (
     
@@ -364,43 +390,27 @@ export default function JobTable() {
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
       >
+        {currentUser != null ? 
         <Box sx={style}>
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Title</TableCell>
-                    <TableCell align="left">Company</TableCell>
-                    <TableCell align="left">Description</TableCell>
-                    <TableCell align="left">Location</TableCell>
-                    <TableCell align="left">Level</TableCell>
-                    <TableCell align="left">Email</TableCell>
-                    <TableCell align="left">Date of Posting</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {modalData &&
-                    <TableRow
-                      key={'data'}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                       {modalData.title}
-                      </TableCell>
-                      <TableCell align="left">{modalData.company}</TableCell>
-                      <TableCell align="left">{modalData.description}</TableCell>
-                      <TableCell align="left">{modalData.location}</TableCell>
-                      <TableCell align="left">{modalData.level}</TableCell>
-                      <TableCell align="left">{modalData.hrEmail}</TableCell>
-                      <TableCell align="left">{modalData.dateOfPosting}</TableCell>
-                    </TableRow>
-                  }
-                </TableBody>
-              </Table>
-            </TableContainer>
+          {modalData && Object.keys(modalData).map(key=>(
+                key != 'masked' ?
+                <>
+                <Typography variant="h6" gutterBottom component="div" style={{fontWeight:'bold'}}>
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  {modalData[key]}
+                </Typography>
+              </>
+              :<></>))
+          }
+        </Box> :
+        <Box sx= {loggeoutStyle}>
+          <Typography variant="caption" display="block" gutterBottom>
+            {"Signin to see more."}
           </Typography>
-        </Box>
+        </Box> 
+        }
       </Modal>
     </Box>
   );
