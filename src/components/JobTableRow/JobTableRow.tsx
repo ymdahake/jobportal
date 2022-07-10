@@ -34,7 +34,7 @@ export default function JobTableRow({tableColumns,row,onDataChange,handleModal}:
         <TableCell key={column.id} align={column.align}>
           {row.masked ? 
           <>
-            ***********
+            *****
             <VisibilityIcon onClick = {()=>onIconClick(row)} style={{cursor:'pointer'}}/>
           </> : 
             column.format && typeof value === 'number'
