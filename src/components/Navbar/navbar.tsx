@@ -17,13 +17,14 @@ import SignIn from "../SignIn/SignIn";
 import { UserContext } from "./../../contexts/user.context";
 import "./navbar.css";
 import { signOutUser } from "../../utils/Firebase.utils";
+import InputModal from './../InputModal/InputModal';
 
 const pages = ["Products", "Pricing", "Blog"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navbar = () => {
   const { currentUser,setCurrentUser } = useContext(UserContext);
-  console.log("current user from Navbar : ", currentUser);
+  // console.log("current user from Navbar : ", currentUser);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -43,9 +44,9 @@ const Navbar = () => {
   };
 
   const handleCloseUserMenu = (event: any) => {
-    console.log(anchorElUser);
-    console.log(anchorElNav);
-    console.log(event);
+    // console.log(anchorElUser);
+    // console.log(anchorElNav);
+    // console.log(event);
     setAnchorElUser(null);
   };
 
@@ -146,7 +147,7 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {!currentUser && <SignIn />}
+            {currentUser && <SignIn />}
             {currentUser && (
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -189,6 +190,7 @@ const Navbar = () => {
           </Box>
         </Toolbar>
       </Container>
+      {/* <InputModal/>  */}
     </AppBar>
   );
 };

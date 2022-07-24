@@ -24,7 +24,6 @@ export default function JobTableRow({tableColumns,row,onDataChange,handleModal}:
     handleModal(row);
   }
 
-  console.log('CurrentUser------>',currentUser);
   return (
     <TableRow hover role="checkbox" tabIndex={-1} key={row.jobId}>
     {tableColumns.map((column,index:number) => {

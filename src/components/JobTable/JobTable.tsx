@@ -13,7 +13,7 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import { visuallyHidden } from "@mui/utils";
 import { Data } from "../../models/Job";
 import { Column } from "../../models/JobTableColumns";
-import { GetAllJobData } from "../../services/JobService";
+import { GetAllJobData, GetJobsDataFromAWS } from "../../services/JobService";
 import { Button } from "@mui/material";
 import SingleSelectFilter from "./../SingleSelectFilter/SingleSelectFilter";
 import { ClearAll, Search } from "@mui/icons-material";
@@ -164,23 +164,41 @@ export default function JobTable() {
   console.log("isMobile : ",isMobile )
 
   React.useEffect(() => {
-    ///For mock local data uncomment below code
+    
     let alteredJobsData: any = jobsData;
     jobsData.map((data, index) => {
       alteredJobsData[index].masked = true;
     });
-    setRows(alteredJobsData);
-    setFilterdRows(jobsData);
-    ///for firebase data uncomment below code
-    // GetAllJobData().then((result) => {
+    ///For mock local data uncomment below code
+    // setRows(alteredJobsData);
+    // setFilterdRows(jobsData);
+   /// =======================================
+    //for firebase data uncomment below code
+    GetAllJobData().then((result) => {
+      console.log("setting the rows",result);
+      let actualData:any = result;
+      actualData.map((data:any,index:number)=>{
+        actualData[index].masked = true;
+      });
+      setRows(actualData);
+      setFilterdRows(result);   
+    });
+
+    //============================
+    //From AWS api
+    // GetJobsDataFromAWS().then(async (result)=>{
+    //   console.log("AWS data :",result)
     //   console.log("setting the rows",result);
     //   let actualData:any = result;
-    //   actualData.map((data:any,index:number)=>{
+    //   await actualData.map((data:any,index:number)=>{
     //     actualData[index].masked = true;
     //   });
+    //   console.log("actualData",actualData)
     //   setRows(actualData);
-    //   setFilterdRows(result);   
+    //   setFilterdRows(result); 
     // });
+
+    
   }, []);
 
   // React.useEffect(()=>{
@@ -412,6 +430,9 @@ export default function JobTable() {
         </Box> 
         }
       </Modal>
+      {/* Model for mobile input */}
+      
+      
     </Box>
   );
 }

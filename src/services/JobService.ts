@@ -1,6 +1,36 @@
+import { User } from 'firebase/auth';
 import { addDoc, doc, getDoc ,collection, getDocs } from 'firebase/firestore';
 import { db } from '../utils/Firebase.utils';
 import { Data } from './../models/Job';
+
+export const GetUserDetail = async (userAuth: User )=>{
+
+  const docRef = doc(db, "users", userAuth.uid);
+  const docSnap = await getDoc(docRef);
+  
+  if (docSnap.exists()) {
+    console.log("User is exists already:", docSnap.data());
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such  User document!");
+  }
+}
+
+export const IsUserExistsInDB = async (userAuth: User )=>{
+
+  const docRef = doc(db, "users", userAuth.uid);
+  const docSnap = await getDoc(docRef);
+  
+  if (docSnap.exists()) {
+    console.log("User exist in db")
+    return true
+  } else {
+    console.log("User not exist in db")
+     return false
+  }
+}
+
+
 
 export const GetJobData = async (id :string)=>{
 
@@ -61,6 +91,20 @@ export const SetJobsData =async (jobsData : Data[])=>{
 
 
 
+}
+
+export const GetJobsDataFromAWS=async()=>{
+  const jobsData : Data[]=[];
+  console.log("GetJobsDataFromAWS")
+  await fetch("http://ec2-3-87-32-117.compute-1.amazonaws.com:8080/getAllJobPost?page=1&size=1000")
+  .then(res=>res.json())
+  .then((json)=>{
+    jobsData.push(...json);
+    console.log("GetJobsDataFromAWS : ",json);
+    console.log("GetJobsDataFromAWS-jobsData : ",jobsData);
+    
+  })
+  return jobsData;
 }
 
 
