@@ -20,7 +20,7 @@ import { signOutUser } from "../../utils/Firebase.utils";
 import InputModal from './../InputModal/InputModal';
 import { IsUserExistsInDB } from "../../services/JobService";
 
-const pages = [ "AboutUs", "Blog"];
+const pages = [ "About-Us", "Blog"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navbar = () => {

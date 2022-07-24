@@ -34,7 +34,7 @@ export default function JobTableRow({tableColumns,row,onDataChange,handleModal}:
           {row.masked ? 
           <>
             *****
-            <VisibilityIcon onClick = {()=>onIconClick(row)} style={{cursor:'pointer'}}/>
+            <VisibilityIcon onClick = {()=>onIconClick(row)} style={{cursor:'pointer'}} fontSize="small"/>
           </> : 
             column.format && typeof value === 'number'
             ? <a style={{textDecoration:'underline',cursor:'pointer'}} onClick={(row)=>onEmailClick(row)}>{column.format(value)}</a>

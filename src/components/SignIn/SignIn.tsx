@@ -31,7 +31,7 @@ export default function SignIn({toggleSignInButton}:any) {
       // GetAllJobData().then((result)=>{
       //   console.log('all jobs data yogi',result)
       // });
-      SetJobsData(jobsData);
+    //  SetJobsData(jobsData);
 
     //  GetJobsDataFromAWS();
     
