@@ -7,28 +7,49 @@ import { GetAllJobData, GetJobsDataFromAWS, GetUserDetail, IsUserExistsInDB } fr
 import { SetJobsData, GetJobData } from './../../services/JobService';
 import { jobsData } from '../../utils/MockData';
 import InputModal from './../InputModal/InputModal';
+import { SendToMobileTwoTone } from '@mui/icons-material';
+import { User } from 'firebase/auth';
 
-export default function SignIn() {
+export default function SignIn({toggleSignInButton}:any) {
   console.log("sign in component rendered");
   const {setCurrentUser} = useContext(UserContext);
-  const [inputMobileNumberNeeded ,setInputMobileNumberNeeded] = React.useState<boolean>(true);
+  const [mobileNumer ,setMobileNumer] = React.useState<string>();
+  const [hideSignIn ,sethideSignIn] = React.useState<boolean>(false);
   const [open, setOpen] = React.useState(false);
+  const [googleUser, setGoogleUser]= React.useState<User>();
+
+  const getMobileNumber=(mobileNumber:string)=>{
+    setMobileNumer(mobileNumber)
+    console.log("getMobileNumber called")
+    toggleSignInButton();
+    handleClose();
+    
+  }
+
     const logGoogleUser= async()=>{
        
       // GetAllJobData().then((result)=>{
       //   console.log('all jobs data yogi',result)
       // });
-     // SetJobsData(jobsData);
+      SetJobsData(jobsData);
 
     //  GetJobsDataFromAWS();
     
         const {user} =await signInWithGooglePopup();
+       
+        setGoogleUser(user)       
         handleOpen(); 
-        setCurrentUser(user);
+        
           
-        console.log(user);
-        const userDocRef = await createUserDocumentFromAuth(user);
-        console.log("set open value ",open);
+        // console.log(user);
+        // if(mobileNumer!=undefined)
+        // {
+        //   let userDocRef = await createUserDocumentFromAuth(user,mobileNumer);
+        //   setCurrentUser(user);
+        // }
+        
+        
+      
     }
 
   const handleClose = () => setOpen(false);
@@ -42,8 +63,8 @@ export default function SignIn() {
   return (  
     <>
     <Button variant="contained" color="success" onClick={logGoogleUser} >SignIn with Google</Button>
-    <Button variant="contained" color="success" onClick={handleOpen} >Open pop up</Button>
-    <InputModal open={open} onClose={handleClose}/>    
+    {/* <Button variant="contained" color="success" onClick={handleOpen} >Open pop up</Button> */}
+    <InputModal open={open} onClose={handleClose} onMobileSubmited={getMobileNumber} user={googleUser}/>    
     </> 
         
   )

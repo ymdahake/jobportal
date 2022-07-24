@@ -7,6 +7,9 @@ import { TextField } from "@mui/material";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { User } from "firebase/auth";
+import { createUserDocumentFromAuth } from "../../utils/Firebase.utils";
+import { UserContext } from "../../contexts/user.context";
 
 const style = {
   position: "absolute" as "absolute",
@@ -23,12 +26,19 @@ const style = {
 interface inputProps {
   open: boolean;
   onClose: any;
+  onMobileSubmited: any;
+  user: User |undefined;
 }
 
-export default function InputModal({ open, onClose }: inputProps) {
+export default function InputModal({
+  open,
+  onClose,
+  onMobileSubmited,
+  user,
+}: inputProps) {
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
+  const { currentUser,setCurrentUser } = React.useContext(UserContext);
   const validationSchema = Yup.object().shape({
     phoneNumber: Yup.string().matches(
       phoneRegExp,
@@ -44,9 +54,17 @@ export default function InputModal({ open, onClose }: inputProps) {
     resolver: yupResolver(validationSchema),
   });
 
-  const onFormSubmit = (data: any) => {
+  const addMobileNumber = async (data: any) => {
     console.log("onFormSubmit invoked");
-    console.log(data);
+    console.log(data.phoneNumber);
+    onMobileSubmited(data);
+    console.log(user);
+    if (data.phoneNumber != undefined && user != undefined) {
+      let userDocRef = await createUserDocumentFromAuth(user, data.phoneNumber);
+      setCurrentUser({...user,phoneNumber :data.phoneNumber});
+    }
+    console.log("current user  now : " ,currentUser);
+
   };
 
   return (
@@ -62,19 +80,20 @@ export default function InputModal({ open, onClose }: inputProps) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Please provide your mobile number.
           </Typography>
-          
-            <TextField
-              id="outlined-basic"
-              label="Mobile Number"
-              variant="outlined"
-              required
-              {...register("phoneNumber")}
-              error={errors.phoneNumber ? true : false}
-              helperText="Enter valid phone number"
-              size="small"
-            />
-            <Button variant="contained" onClick={onFormSubmit}>Submit</Button>
-        
+
+          <TextField
+            id="outlined-basic"
+            label="Mobile Number"
+            variant="outlined"
+            required
+            {...register("phoneNumber")}
+            error={errors.phoneNumber ? true : false}
+            helperText="Enter valid phone number"
+            size="small"
+          />
+          <Button variant="contained" onClick={handleSubmit(addMobileNumber)}>
+            Submit
+          </Button>
         </Box>
       </Modal>
     </div>

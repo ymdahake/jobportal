@@ -18,8 +18,9 @@ import { UserContext } from "./../../contexts/user.context";
 import "./navbar.css";
 import { signOutUser } from "../../utils/Firebase.utils";
 import InputModal from './../InputModal/InputModal';
+import { IsUserExistsInDB } from "../../services/JobService";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = [ "AboutUs", "Blog"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navbar = () => {
@@ -31,6 +32,17 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+  const [hideSignIn ,sethideSignIn] = React.useState<boolean>(false);
+
+
+  React.useEffect(()=>{
+    const userPresent =IsUserExistsInDB(currentUser).then((res)=>{
+      if(res)
+      {
+        sethideSignIn(true);
+      }
+    })
+  },[currentUser])
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -43,6 +55,10 @@ const Navbar = () => {
     setAnchorElNav(null);
   };
 
+  const toggleSignInButton=()=>{
+    sethideSignIn(true);
+  }
+
   const handleCloseUserMenu = (event: any) => {
     // console.log(anchorElUser);
     // console.log(anchorElNav);
@@ -53,16 +69,19 @@ const Navbar = () => {
   const signOutHandler =async()=>{
     await signOutUser();
     setCurrentUser(null);
+    sethideSignIn(false);
 
   }
+
+  
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             component="a"
             href="/"
@@ -147,8 +166,9 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {currentUser && <SignIn />}
-            {currentUser && (
+            {/* {!currentUser && <SignIn />} */}
+            { !hideSignIn &&  <SignIn toggleSignInButton={toggleSignInButton} />}
+            {hideSignIn && currentUser &&  (
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar

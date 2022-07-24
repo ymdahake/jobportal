@@ -409,7 +409,7 @@ export default function JobTable() {
         aria-describedby="keep-mounted-modal-description"
       >
         {currentUser != null ? 
-        <Box sx={style}>
+        <Box sx={style} className="jobDetail">
           {modalData && Object.keys(modalData).map(key=>(
                 key != 'masked' ?
                 <>

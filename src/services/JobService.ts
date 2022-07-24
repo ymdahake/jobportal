@@ -16,8 +16,12 @@ export const GetUserDetail = async (userAuth: User )=>{
   }
 }
 
-export const IsUserExistsInDB = async (userAuth: User )=>{
-
+export const IsUserExistsInDB = async (userAuth: User |null )=>{
+  console.log("IsUserExistsInDB called ")
+  if(userAuth ==null)
+  {
+    return false;
+  }
   const docRef = doc(db, "users", userAuth.uid);
   const docSnap = await getDoc(docRef);
   
@@ -61,6 +65,7 @@ export const GetAllJobData  = async ()  =>{
         job.level=doc.data()['level'];
         job.remote=doc.data()['remote'];
         job.title=doc.data()['title'];
+        job.postedBy=doc.data()['postedBy'];
         jobsData.push(job);
       // doc.data() is never undefined for query doc snapshots
       
