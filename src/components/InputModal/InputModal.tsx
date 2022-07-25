@@ -77,7 +77,7 @@ export default function InputModal({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h6" component="h2" sx={{mb:1}}>
             Please provide your mobile number.
           </Typography>
 
@@ -90,6 +90,7 @@ export default function InputModal({
             error={errors.phoneNumber ? true : false}
             helperText="Enter valid phone number"
             size="small"
+            sx={{mr:1}}
           />
           <Button variant="contained" onClick={handleSubmit(addMobileNumber)}>
             Submit
