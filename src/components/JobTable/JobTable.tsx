@@ -424,7 +424,7 @@ export default function JobTable() {
           }
         </Box> :
         <Box sx= {loggeoutStyle}>
-          <Typography variant="caption" display="block" gutterBottom>
+          <Typography variant="h5" display="block" gutterBottom>
             {"Signin to see more."}
           </Typography>
         </Box> 
