@@ -26,6 +26,7 @@ import Typography from '@mui/material/Typography';
 import SeeMore from './../SeeMore/SeeMore';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { UserContext } from "./../../contexts/user.context";
+import SignIn from "../SignIn/SignIn";
 
 
 
@@ -425,8 +426,9 @@ export default function JobTable() {
         </Box> :
         <Box sx= {loggeoutStyle}>
           <Typography variant="h5" display="block" gutterBottom>
-            {"Signin to see more."}
+            {"Sign-in to see more."}
           </Typography>
+          <SignIn toggleSignInButton={false} />
         </Box> 
         }
       </Modal>

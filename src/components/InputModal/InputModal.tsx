@@ -36,8 +36,8 @@ export default function InputModal({
   onMobileSubmited,
   user,
 }: inputProps) {
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  const phoneRegExp =/^[0]?[6789]\d{9}$/;
+    // /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const { currentUser,setCurrentUser } = React.useContext(UserContext);
   const validationSchema = Yup.object().shape({
     phoneNumber: Yup.string().matches(

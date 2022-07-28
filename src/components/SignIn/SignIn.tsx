@@ -62,7 +62,7 @@ export default function SignIn({toggleSignInButton}:any) {
   }
   return (  
     <>
-    <Button variant="contained" color="success" onClick={logGoogleUser} >SignIn with Google</Button>
+    <Button variant="contained" color="success" onClick={logGoogleUser} >Sign-In with Google</Button>
     {/* <Button variant="contained" color="success" onClick={handleOpen} >Open pop up</Button> */}
     <InputModal open={open} onClose={handleClose} onMobileSubmited={getMobileNumber} user={googleUser}/>    
     </> 

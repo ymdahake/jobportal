@@ -3,6 +3,7 @@ import Paper from "@mui/material/Paper";
 import React, { useContext } from "react";
 import "./SeeMore.css";
 import { UserContext } from "./../../contexts/user.context";
+import SignIn from "../SignIn/SignIn";
 
 export default function SeeMore() {
 
@@ -12,7 +13,7 @@ export default function SeeMore() {
       <Typography variant="h4" component="h2">
         Sign in to See More...
       </Typography>
-      ;
+      <SignIn toggleSignInButton={false} />
     </Paper>
   );
 }
