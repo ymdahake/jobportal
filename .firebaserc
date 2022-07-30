@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "jobportal-8b13d"
-  }
+    "default": "jobportal-2a30b",
+    "AmitApp": "jobportal-2a30b"
+  },
+  "targets": {}
 }
