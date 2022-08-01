@@ -1,10 +1,11 @@
 .seeMore{
-    position: absolute;
+    /* position: absolute; */
     height: 10%;
-    width: 99%;
-    margin-top: -83%;
+    /* width: 99%; */
+    /* margin-top: -83%; */
     justify-content: center;
     align-items: center;
     display: flex;
-    background-color: #888888;
+    background-color: white;
+    padding: 15px;
 }

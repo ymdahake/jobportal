@@ -400,7 +400,7 @@ export default function JobTable() {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-       <SeeMore/>
+      
       </Paper>
       <Modal
         keepMounted
